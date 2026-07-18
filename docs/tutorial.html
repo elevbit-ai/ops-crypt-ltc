@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OpS Crypt LTC — Tutorial EN · PT</title>
+  <meta name="description" content="Step-by-step tutorial for OpS Crypt LTC wallet and public Litecoin APIs. English and Portuguese." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23345c9c' width='100' height='100' rx='20'/><text y='68' x='28' font-size='55' fill='white' font-family='sans-serif' font-weight='bold'>Ł</text></svg>" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700;9..40,800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root{--bg:#07090f;--card:#11151e;--border:#252b38;--ltc:#345c9c;--ltc2:#7aafff;--text:#eef2f8;--muted:#94a0b8;--font:"DM Sans",system-ui,sans-serif;--serif:"Instrument Serif",Georgia,serif;--mono:"JetBrains Mono",monospace}
+    *{box-sizing:border-box;margin:0;padding:0}body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.65}
+    body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse 70% 40% at 50% -8%,rgba(52,92,156,.22),transparent 55%)}
+    .page{position:relative;z-index:1;max-width:780px;margin:0 auto;padding:0 1.2rem 4rem}
+    a{color:var(--ltc2)}nav{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:space-between;align-items:center;padding:1.1rem 0;border-bottom:1px solid var(--border);margin-bottom:1.5rem}
+    .brand{display:flex;gap:.55rem;align-items:center;color:var(--text);text-decoration:none;font-weight:800}
+    .mark{width:34px;height:34px;border-radius:9px;background:linear-gradient(145deg,#6ba3f0,var(--ltc));display:grid;place-items:center}
+    .links{display:flex;flex-wrap:wrap;gap:.35rem;align-items:center}
+    .links a{color:var(--muted);text-decoration:none;font-size:.85rem;padding:.35rem .7rem;border-radius:999px}
+    .links a:hover{background:var(--card);color:var(--text)}
+    .lang{display:inline-flex;border:1px solid var(--border);border-radius:999px;overflow:hidden}
+    .lang button{border:0;background:0;color:var(--muted);font:inherit;font-size:.8rem;font-weight:700;padding:.35rem .65rem;cursor:pointer}
+    .lang button.on{background:var(--ltc);color:#fff}
+    h1{font-family:var(--serif);font-weight:400;font-size:clamp(1.8rem,4vw,2.4rem);margin-bottom:.5rem}
+    h1 em{font-style:italic;color:var(--ltc2)}
+    .lead{color:var(--muted);margin-bottom:1.25rem}
+    .notice{background:rgba(52,92,156,.12);border:1px solid rgba(122,175,255,.25);border-radius:14px;padding:.85rem 1rem;color:var(--muted);font-size:.9rem;margin-bottom:1.5rem}
+    .notice strong{color:var(--ltc2)}
+    h2{font-family:var(--serif);font-weight:400;font-size:1.4rem;margin:2rem 0 .7rem;padding-bottom:.35rem;border-bottom:1px solid var(--border)}
+    h3{font-size:1rem;margin:1rem 0 .35rem;color:#fff}
+    p,li{color:var(--muted);font-size:.93rem}ul,ol{padding-left:1.2rem;margin:.4rem 0}li{margin:.4rem 0}
+    .box{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.1rem 1.2rem;margin:.8rem 0}
+    pre{background:#0a0d14;border:1px solid var(--border);border-radius:12px;padding:1rem;overflow:auto;font-family:var(--mono);font-size:.78rem;color:#c5d4f0;line-height:1.5}
+    code{font-family:var(--mono);font-size:.82em;background:#0a0d14;padding:.1rem .35rem;border-radius:4px;color:#c5d4f0}
+    .step{counter-increment:s;margin:1rem 0;padding-left:.2rem}
+    .step h3::before{content:counter(s) ". ";color:var(--ltc2)}
+    section{counter-reset:s}
+    .warn{background:rgba(240,180,41,.07);border:1px solid rgba(240,180,41,.28);color:#e0c05a;border-radius:14px;padding:1rem;font-size:.9rem;margin:1rem 0}
+    .links-box a{display:block;margin:.4rem 0;word-break:break-all}
+    .lang-block{display:none}.lang-block.on{display:block}
+    footer{margin-top:3rem;padding-top:1.2rem;border-top:1px solid var(--border);text-align:center;color:#667;font-size:.8rem}
+  </style>
+</head>
+<body>
+  <div class="page">
+    <nav>
+      <a class="brand" href="./index.html"><span class="mark">Ł</span> OpS Crypt · Tutorial</a>
+      <div class="links">
+        <a href="./index.html">About</a>
+        <a href="./api.html">API</a>
+        <a href="./tutorial.html">Tutorial</a>
+        <a href="./playground.html">Playground</a>
+        <a href="https://github.com/elevbit-ai/ops-crypt-ltc" target="_blank" rel="noopener">GitHub</a>
+        <div class="lang">
+          <button type="button" id="btn-en" class="on">EN</button>
+          <button type="button" id="btn-pt">PT</button>
+        </div>
+      </div>
+    </nav>
+
+    <div id="lang-en" class="lang-block on">
+      <div class="notice"><strong>This is a tutorial website</strong> — not the wallet app. The program lives in the GitHub repository.</div>
+      <h1>Tutorial: OpS Crypt <em>LTC</em></h1>
+      <p class="lead">Step-by-step guide: understand the product, public APIs, and how to run the wallet source safely.</p>
+
+      <h2>Official links</h2>
+      <div class="box links-box">
+        <a href="https://elevbit-ai.github.io/ops-crypt-ltc/">1. About the project</a>
+        <a href="https://elevbit-ai.github.io/ops-crypt-ltc/api.html">2. API reference (public Litecoin endpoints)</a>
+        <a href="https://elevbit-ai.github.io/ops-crypt-ltc/tutorial.html">3. This tutorial</a>
+        <a href="https://elevbit-ai.github.io/ops-crypt-ltc/playground.html">4. Live API playground</a>
+        <a href="https://github.com/elevbit-ai/ops-crypt-ltc">5. Source code (the program)</a>
+        <a href="https://github.com/elevbit-ai/ops-crypt-ltc/releases">6. Releases (if published)</a>
+      </div>
+
+      <h2>Part A — Product concepts</h2>
+      <section>
+        <div class="step"><h3>What OpS Crypt is</h3>
+          <p>A non-custodial Litecoin-only wallet project. You create or import keys (BIP39 / WIF), receive LTC, send LTC, and back up an encrypted vault file.</p>
+        </div>
+        <div class="step"><h3>What it is not</h3>
+          <p>Not a bank, not an exchange, not MetaMask. MetaMask does not support Litecoin. Trust Wallet can import the same BIP39 seed for LTC.</p>
+        </div>
+        <div class="step"><h3>Where keys live</h3>
+          <p>On the user device, encrypted with a PIN. Public blockchain APIs only see addresses and signed transactions.</p>
+        </div>
+      </section>
+
+      <h2>Part B — Public APIs on the internet</h2>
+      <p>OpS Crypt talks to open Litecoin APIs already published by third parties:</p>
+      <div class="box">
+        <ul>
+          <li><strong>Litecoin Space:</strong> <code>https://litecoinspace.org/api</code></li>
+          <li><strong>BlockCypher:</strong> <code>https://api.blockcypher.com/v1/ltc/main</code></li>
+          <li><strong>Blockchair:</strong> <code>https://api.blockchair.com/litecoin</code></li>
+        </ul>
+        <p style="margin-top:.7rem">Full endpoint list and live tests: <a href="./api.html">API reference</a> · <a href="./playground.html">Playground</a></p>
+      </div>
+      <div class="step"><h3>Check an address balance (example)</h3>
+        <pre>curl -s "https://api.blockcypher.com/v1/ltc/main/addrs/YOUR_LTC_ADDRESS/balance"</pre>
+      </div>
+      <div class="step"><h3>Broadcast a signed tx (example shape)</h3>
+        <pre>curl -s -X POST "https://api.blockcypher.com/v1/ltc/main/txs/push" \
+  -H "Content-Type: application/json" \
+  -d "{\"tx\":\"SIGNED_HEX_HERE\"}"</pre>
+        <p>Never send private keys in these requests.</p>
+      </div>
+
+      <h2>Part C — Run the wallet program (from source)</h2>
+      <div class="box">
+        <pre>git clone https://github.com/elevbit-ai/ops-crypt-ltc.git
+cd ops-crypt-ltc
+npm install
+npm run dev</pre>
+        <p style="margin-top:.7rem">Open the local URL shown by Vite (usually <code>http://localhost:8080</code>). That is the program UI.</p>
+      </div>
+      <div class="step"><h3>Create wallet</h3>
+        <p>Set a 6-digit PIN → Create 12-word seed → write it offline → enter the app.</p>
+      </div>
+      <div class="step"><h3>Receive</h3>
+        <p>Copy SegWit (<code>ltc1…</code>) or Legacy (<code>L…</code>) address / show QR. Only send LTC.</p>
+      </div>
+      <div class="step"><h3>Send</h3>
+        <p>Paste destination + amount → app builds & signs locally → broadcasts via the public APIs above.</p>
+      </div>
+      <div class="step"><h3>Backup</h3>
+        <p>Download encrypted <code>.opsjson</code> or export seed/WIF. Store offline.</p>
+      </div>
+
+      <h2>Part D — Android APK</h2>
+      <p>See <a href="https://github.com/elevbit-ai/ops-crypt-ltc/blob/main/documentation/APK.txt">documentation/APK.txt</a> and <a href="https://github.com/elevbit-ai/ops-crypt-ltc/blob/main/documentation/SIGNING.md">SIGNING.md</a> in the repository.</p>
+
+      <div class="warn"><strong>Safety:</strong> Never enter your seed on this documentation site. Only use the local app or APK you built/trust.</div>
+
+      <h2>Author</h2>
+      <p><strong style="color:#fff">Joaquim Pedro de Morais Filho</strong> · <a href="https://usacomment.com">USAcomment.com</a> · <a href="mailto:zicutake@mail.ru">zicutake@mail.ru</a></p>
+    </div>
+
+    <div id="lang-pt" class="lang-block">
+      <div class="notice"><strong>Este é um site de tutorial</strong> — não é o app da carteira. O programa está no repositório GitHub.</div>
+      <h1>Tutorial: OpS Crypt <em>LTC</em></h1>
+      <p class="lead">Guia passo a passo: produto, APIs públicas e como rodar o código com segurança.</p>
+
+      <h2>Links oficiais</h2>
+      <div class="box links-box">
+        <a href="https://elevbit-ai.github.io/ops-crypt-ltc/">1. Sobre o projeto</a>
+        <a href="https://elevbit-ai.github.io/ops-crypt-ltc/api.html">2. Referência de API (endpoints públicos)</a>
+        <a href="https://elevbit-ai.github.io/ops-crypt-ltc/tutorial.html">3. Este tutorial</a>
+        <a href="https://elevbit-ai.github.io/ops-crypt-ltc/playground.html">4. Playground de API ao vivo</a>
+        <a href="https://github.com/elevbit-ai/ops-crypt-ltc">5. Código-fonte (o programa)</a>
+      </div>
+
+      <h2>Parte A — Conceitos do produto</h2>
+      <section>
+        <div class="step"><h3>O que é o OpS Crypt</h3>
+          <p>Carteira Litecoin não-custodial: criar/importar chaves (BIP39/WIF), receber, enviar e fazer backup criptografado.</p>
+        </div>
+        <div class="step"><h3>O que não é</h3>
+          <p>Não é banco, corretora nem MetaMask. MetaMask não suporta Litecoin. A Trust Wallet pode importar a mesma seed BIP39 para LTC.</p>
+        </div>
+        <div class="step"><h3>Onde ficam as chaves</h3>
+          <p>No aparelho do usuário, cifradas com PIN. As APIs da blockchain só veem endereços públicos e transações assinadas.</p>
+        </div>
+      </section>
+
+      <h2>Parte B — APIs públicas na internet</h2>
+      <div class="box">
+        <ul>
+          <li><strong>Litecoin Space:</strong> <code>https://litecoinspace.org/api</code></li>
+          <li><strong>BlockCypher:</strong> <code>https://api.blockcypher.com/v1/ltc/main</code></li>
+          <li><strong>Blockchair:</strong> <code>https://api.blockchair.com/litecoin</code></li>
+        </ul>
+        <p style="margin-top:.7rem">Lista completa e testes: <a href="./api.html">API</a> · <a href="./playground.html">Playground</a></p>
+      </div>
+      <div class="step"><h3>Consultar saldo (exemplo)</h3>
+        <pre>curl -s "https://api.blockcypher.com/v1/ltc/main/addrs/SEU_ENDERECO_LTC/balance"</pre>
+      </div>
+
+      <h2>Parte C — Rodar o programa (código-fonte)</h2>
+      <div class="box">
+        <pre>git clone https://github.com/elevbit-ai/ops-crypt-ltc.git
+cd ops-crypt-ltc
+npm install
+npm run dev</pre>
+        <p style="margin-top:.7rem">Abra a URL local do Vite (em geral <code>http://localhost:8080</code>). Essa é a interface do programa.</p>
+      </div>
+      <div class="step"><h3>Criar carteira</h3><p>PIN de 6 dígitos → gerar 12 palavras → anotar offline → entrar.</p></div>
+      <div class="step"><h3>Receber</h3><p>Copiar endereço SegWit ou Legacy / QR. Envie somente LTC.</p></div>
+      <div class="step"><h3>Enviar</h3><p>Destino + valor → assinatura local → transmissão pelas APIs públicas.</p></div>
+      <div class="step"><h3>Backup</h3><p>Baixar <code>.opsjson</code> criptografado ou exportar seed/WIF.</p></div>
+
+      <div class="warn"><strong>Segurança:</strong> nunca digite a seed neste site de documentação. Use só o app local ou o APK em que você confia.</div>
+
+      <h2>Autor</h2>
+      <p><strong style="color:#fff">Joaquim Pedro de Morais Filho</strong> · <a href="https://usacomment.com">USAcomment.com</a> · <a href="mailto:zicutake@mail.ru">zicutake@mail.ru</a></p>
+    </div>
+
+    <footer>OpS Crypt LTC · Tutorial site · © Joaquim Pedro de Morais Filho</footer>
+  </div>
+  <script>
+    const en=document.getElementById("lang-en"),pt=document.getElementById("lang-pt");
+    const btnEn=document.getElementById("btn-en"),btnPt=document.getElementById("btn-pt");
+    function setLang(l){const isEn=l==="en";en.classList.toggle("on",isEn);pt.classList.toggle("on",!isEn);btnEn.classList.toggle("on",isEn);btnPt.classList.toggle("on",!isEn);document.documentElement.lang=isEn?"en":"pt-BR";localStorage.setItem("ops_tut_lang",l)}
+    btnEn.onclick=()=>setLang("en");btnPt.onclick=()=>setLang("pt");
+    const s=localStorage.getItem("ops_tut_lang");if(s==="pt"||(!s&&navigator.language?.toLowerCase().startsWith("pt")))setLang("pt");
+  </script>
+</body>
+</html>

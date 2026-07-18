@@ -9,11 +9,19 @@
 > **Author:** Joaquim Pedro de Morais Filho  
 > **Web:** [USAcomment.com](https://usacomment.com) · **Email:** zicutake@mail.ru  
 
-🌐 **Explanatory website only (EN / PT — not the wallet app):**  
-[elevbit-ai.github.io/ops-crypt-ltc](https://elevbit-ai.github.io/ops-crypt-ltc/)  
+### Published links
 
-📦 **Source code (the program):**  
-[github.com/elevbit-ai/ops-crypt-ltc](https://github.com/elevbit-ai/ops-crypt-ltc)  
+| Page | URL |
+|------|-----|
+| **About (EN/PT)** | https://elevbit-ai.github.io/ops-crypt-ltc/ |
+| **API reference** | https://elevbit-ai.github.io/ops-crypt-ltc/api.html |
+| **Tutorial** | https://elevbit-ai.github.io/ops-crypt-ltc/tutorial.html |
+| **Live playground** | https://elevbit-ai.github.io/ops-crypt-ltc/playground.html |
+| **API catalog JSON** | https://elevbit-ai.github.io/ops-crypt-ltc/apis.json |
+| **GitHub (program)** | https://github.com/elevbit-ai/ops-crypt-ltc |
+| **API client source** | https://github.com/elevbit-ai/ops-crypt-ltc/blob/main/src/lib/ltc-api.js |
+
+> The website is **documentation only** — not the wallet program.  
 
 ---
 

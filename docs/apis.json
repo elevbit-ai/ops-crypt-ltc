@@ -1,0 +1,91 @@
+{
+  "name": "OpS Crypt LTC — Public Litecoin API catalog",
+  "version": "1.0.0",
+  "author": {
+    "name": "Joaquim Pedro de Morais Filho",
+    "site": "https://usacomment.com",
+    "email": "zicutake@mail.ru"
+  },
+  "project": {
+    "github": "https://github.com/elevbit-ai/ops-crypt-ltc",
+    "website": "https://elevbit-ai.github.io/ops-crypt-ltc/",
+    "api_docs": "https://elevbit-ai.github.io/ops-crypt-ltc/api.html",
+    "tutorial": "https://elevbit-ai.github.io/ops-crypt-ltc/tutorial.html",
+    "playground": "https://elevbit-ai.github.io/ops-crypt-ltc/playground.html",
+    "client_source": "https://github.com/elevbit-ai/ops-crypt-ltc/blob/main/src/lib/ltc-api.js"
+  },
+  "network": "litecoin-mainnet",
+  "note": "Non-custodial. Private keys are never sent to these APIs.",
+  "providers": [
+    {
+      "id": "litecoinspace",
+      "name": "Litecoin Space",
+      "base": "https://litecoinspace.org/api",
+      "priority": 1
+    },
+    {
+      "id": "blockcypher",
+      "name": "BlockCypher",
+      "base": "https://api.blockcypher.com/v1/ltc/main",
+      "priority": 2
+    },
+    {
+      "id": "blockchair",
+      "name": "Blockchair",
+      "base": "https://api.blockchair.com/litecoin",
+      "priority": 3
+    }
+  ],
+  "endpoints": [
+    {
+      "id": "balance",
+      "method": "GET",
+      "urls": [
+        "https://litecoinspace.org/api/address/{address}",
+        "https://api.blockcypher.com/v1/ltc/main/addrs/{address}/balance",
+        "https://api.blockchair.com/litecoin/dashboards/address/{address}"
+      ]
+    },
+    {
+      "id": "utxo",
+      "method": "GET",
+      "urls": [
+        "https://litecoinspace.org/api/address/{address}/utxo",
+        "https://api.blockcypher.com/v1/ltc/main/addrs/{address}?unspentOnly=true&includeScript=true"
+      ]
+    },
+    {
+      "id": "tx_hex",
+      "method": "GET",
+      "urls": [
+        "https://litecoinspace.org/api/tx/{txid}/hex",
+        "https://api.blockcypher.com/v1/ltc/main/txs/{txid}?includeHex=true"
+      ]
+    },
+    {
+      "id": "history",
+      "method": "GET",
+      "urls": [
+        "https://api.blockcypher.com/v1/ltc/main/addrs/{address}?limit=20",
+        "https://litecoinspace.org/api/address/{address}/txs"
+      ]
+    },
+    {
+      "id": "broadcast",
+      "method": "POST",
+      "urls": [
+        "https://litecoinspace.org/api/tx",
+        "https://api.blockcypher.com/v1/ltc/main/txs/push",
+        "https://api.blockchair.com/litecoin/push/transaction"
+      ]
+    },
+    {
+      "id": "price_usd",
+      "method": "GET",
+      "urls": [
+        "https://api.coinbase.com/v2/prices/LTC-USD/spot",
+        "https://api.coingecko.com/api/v3/simple/price?ids=litecoin&vs_currencies=usd"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OpS Crypt LTC — Public API Reference | EN · PT</title>
+  <meta name="description" content="Public Litecoin API endpoints used by OpS Crypt LTC, with examples and bilingual tutorial links." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23345c9c' width='100' height='100' rx='20'/><text y='68' x='28' font-size='55' fill='white' font-family='sans-serif' font-weight='bold'>Ł</text></svg>" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700;9..40,800&family=JetBrains+Mono:wght@400;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:#07090f; --card:#11151e; --border:#252b38; --ltc:#345c9c; --ltc2:#7aafff;
+      --text:#eef2f8; --muted:#94a0b8; --ok:#3ecf8e; --code:#0a0d14;
+      --font:"DM Sans",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,monospace;
+      --serif:"Instrument Serif",Georgia,serif;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
+    body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse 70% 40% at 50% -8%,rgba(52,92,156,.25),transparent 55%)}
+    .page{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:0 1.2rem 4rem}
+    a{color:var(--ltc2)}
+    nav{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:space-between;padding:1.1rem 0;border-bottom:1px solid var(--border);margin-bottom:1.5rem}
+    .brand{display:flex;align-items:center;gap:.55rem;color:var(--text);text-decoration:none;font-weight:800}
+    .mark{width:34px;height:34px;border-radius:9px;background:linear-gradient(145deg,#6ba3f0,var(--ltc));display:grid;place-items:center}
+    .links{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center}
+    .links a{color:var(--muted);text-decoration:none;font-size:.85rem;padding:.35rem .7rem;border-radius:999px;border:1px solid transparent}
+    .links a:hover{color:var(--text);border-color:var(--border);background:var(--card)}
+    .lang{display:inline-flex;border:1px solid var(--border);border-radius:999px;overflow:hidden}
+    .lang button{border:0;background:0;color:var(--muted);font:inherit;font-size:.8rem;font-weight:700;padding:.35rem .65rem;cursor:pointer}
+    .lang button.on{background:var(--ltc);color:#fff}
+    h1{font-family:var(--serif);font-weight:400;font-size:clamp(1.8rem,4vw,2.4rem);margin-bottom:.5rem}
+    h1 em{font-style:italic;color:var(--ltc2)}
+    .lead{color:var(--muted);margin-bottom:1.5rem;max-width:40em}
+    .notice{background:rgba(52,92,156,.12);border:1px solid rgba(122,175,255,.25);border-radius:14px;padding:.85rem 1rem;color:var(--muted);font-size:.9rem;margin-bottom:1.5rem}
+    .notice strong{color:var(--ltc2)}
+    h2{font-family:var(--serif);font-weight:400;font-size:1.45rem;margin:2rem 0 .75rem;padding-bottom:.4rem;border-bottom:1px solid var(--border)}
+    h3{font-size:1rem;margin:1.1rem 0 .4rem}
+    p,li{color:var(--muted);font-size:.93rem}
+    ul,ol{padding-left:1.2rem;margin:.4rem 0}
+    li{margin:.35rem 0}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.1rem 1.2rem;margin:1rem 0}
+    .method{display:inline-block;font-size:.72rem;font-weight:800;padding:.15rem .45rem;border-radius:6px;background:rgba(62,207,142,.15);color:var(--ok);margin-right:.4rem}
+    .method.post{background:rgba(122,175,255,.15);color:var(--ltc2)}
+    code,pre{font-family:var(--mono)}
+    code{font-size:.82em;background:var(--code);padding:.1rem .35rem;border-radius:4px;color:#c5d4f0}
+    pre{background:var(--code);border:1px solid var(--border);border-radius:12px;padding:1rem;overflow:auto;font-size:.78rem;color:#c5d4f0;line-height:1.5;margin:.5rem 0}
+    table{width:100%;border-collapse:collapse;font-size:.88rem;margin:.6rem 0}
+    th,td{text-align:left;padding:.5rem .35rem;border-bottom:1px solid var(--border);color:var(--muted);vertical-align:top}
+    th{color:var(--text)}
+    .url-list a{display:block;margin:.35rem 0;word-break:break-all}
+    .lang-block{display:none}.lang-block.on{display:block}
+    footer{margin-top:3rem;padding-top:1.2rem;border-top:1px solid var(--border);text-align:center;color:#667;font-size:.8rem}
+    .try{display:flex;flex-wrap:wrap;gap:.5rem;margin:.7rem 0}
+    .try input{flex:1;min-width:200px;background:var(--code);border:1px solid var(--border);border-radius:10px;padding:.7rem .85rem;color:var(--text);font:inherit}
+    .try button{border:0;border-radius:10px;padding:.7rem 1rem;background:linear-gradient(135deg,#6ba3f0,var(--ltc));color:#fff;font-weight:700;cursor:pointer}
+    #live-out,#live-out-pt{white-space:pre-wrap;word-break:break-all;max-height:280px;overflow:auto}
+  </style>
+</head>
+<body>
+  <div class="page">
+    <nav>
+      <a class="brand" href="./index.html"><span class="mark">Ł</span> OpS Crypt · API</a>
+      <div class="links">
+        <a href="./index.html">About</a>
+        <a href="./tutorial.html">Tutorial</a>
+        <a href="./api.html">API</a>
+        <a href="./playground.html">Playground</a>
+        <a href="https://github.com/elevbit-ai/ops-crypt-ltc" target="_blank" rel="noopener">GitHub</a>
+        <div class="lang">
+          <button type="button" id="btn-en" class="on">EN</button>
+          <button type="button" id="btn-pt">PT</button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- EN -->
+    <div id="lang-en" class="lang-block on">
+      <h1>Public <em>Litecoin APIs</em> used by OpS Crypt</h1>
+      <p class="lead">
+        Documentation of the internet-facing Litecoin network endpoints that power balance, UTXOs, history and broadcast in OpS Crypt LTC.
+        This page is documentation — not a private backend that holds keys.
+      </p>
+      <div class="notice">
+        <strong>Important:</strong> OpS Crypt is non-custodial. Private keys never go to these APIs.
+        Only public addresses and already-signed transactions are sent over the internet.
+      </div>
+
+      <h2>1. Official project links</h2>
+      <div class="card url-list">
+        <a href="https://elevbit-ai.github.io/ops-crypt-ltc/">Website (about)</a>
+        <a href="https://elevbit-ai.github.io/ops-crypt-ltc/api.html">API reference (this page)</a>
+        <a href="https://elevbit-ai.github.io/ops-crypt-ltc/tutorial.html">Full tutorial EN/PT</a>
+        <a href="https://elevbit-ai.github.io/ops-crypt-ltc/playground.html">Live API playground</a>
+        <a href="https://github.com/elevbit-ai/ops-crypt-ltc">Source code on GitHub</a>
+        <a href="https://github.com/elevbit-ai/ops-crypt-ltc/blob/main/src/lib/ltc-api.js">API client source (<code>ltc-api.js</code>)</a>
+      </div>
+
+      <h2>2. Providers (fallback order)</h2>
+      <table>
+        <thead><tr><th>#</th><th>Provider</th><th>Base URL</th><th>Role</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Litecoin Space</td><td><code>https://litecoinspace.org/api</code></td><td>Primary (mempool-style)</td></tr>
+          <tr><td>2</td><td>BlockCypher</td><td><code>https://api.blockcypher.com/v1/ltc/main</code></td><td>Fallback</td></tr>
+          <tr><td>3</td><td>Blockchair</td><td><code>https://api.blockchair.com/litecoin</code></td><td>Fallback</td></tr>
+          <tr><td>—</td><td>Coinbase / CoinGecko</td><td>price APIs</td><td>USD display only</td></tr>
+        </tbody>
+      </table>
+
+      <h2>3. Endpoint catalog</h2>
+
+      <div class="card">
+        <h3><span class="method">GET</span> Address balance</h3>
+        <pre>https://litecoinspace.org/api/address/{ADDRESS}
+https://api.blockcypher.com/v1/ltc/main/addrs/{ADDRESS}/balance
+https://api.blockchair.com/litecoin/dashboards/address/{ADDRESS}</pre>
+        <p>Returns funded/spent totals (or balance in litoshis). OpS normalizes to confirmed / unconfirmed / total.</p>
+      </div>
+
+      <div class="card">
+        <h3><span class="method">GET</span> UTXOs</h3>
+        <pre>https://litecoinspace.org/api/address/{ADDRESS}/utxo
+https://api.blockcypher.com/v1/ltc/main/addrs/{ADDRESS}?unspentOnly=true&includeScript=true</pre>
+        <p>Unspent outputs used to build a send transaction.</p>
+      </div>
+
+      <div class="card">
+        <h3><span class="method">GET</span> Transaction hex (for legacy inputs)</h3>
+        <pre>https://litecoinspace.org/api/tx/{TXID}/hex
+https://api.blockcypher.com/v1/ltc/main/txs/{TXID}?includeHex=true</pre>
+      </div>
+
+      <div class="card">
+        <h3><span class="method">GET</span> History</h3>
+        <pre>https://api.blockcypher.com/v1/ltc/main/addrs/{ADDRESS}?limit=20
+https://litecoinspace.org/api/address/{ADDRESS}/txs</pre>
+      </div>
+
+      <div class="card">
+        <h3><span class="method post">POST</span> Broadcast signed transaction</h3>
+        <pre>POST https://litecoinspace.org/api/tx
+Body: raw transaction hex (text/plain)
+
+POST https://api.blockcypher.com/v1/ltc/main/txs/push
+Body: {"tx":"<hex>"}
+
+POST https://api.blockchair.com/litecoin/push/transaction
+Body: data=<hex></pre>
+        <p>Only a fully signed transaction is submitted — never a private key.</p>
+      </div>
+
+      <div class="card">
+        <h3><span class="method">GET</span> LTC/USD price</h3>
+        <pre>https://api.coinbase.com/v2/prices/LTC-USD/spot
+https://api.coingecko.com/api/v3/simple/price?ids=litecoin&vs_currencies=usd</pre>
+      </div>
+
+      <h2>4. Example (curl)</h2>
+      <pre>curl -s "https://api.blockcypher.com/v1/ltc/main/addrs/LTC_ADDRESS_HERE/balance"</pre>
+      <pre>curl -s "https://litecoinspace.org/api/address/LTC_ADDRESS_HERE"</pre>
+
+      <h2>5. Quick live test (balance)</h2>
+      <p>Paste a public Litecoin address (not a private key):</p>
+      <div class="try">
+        <input id="addr-en" placeholder="ltc1... or L..." spellcheck="false" />
+        <button type="button" id="go-en">Query balance</button>
+      </div>
+      <pre id="live-out">Result will appear here…</pre>
+
+      <h2>6. Units</h2>
+      <ul>
+        <li><strong>1 LTC</strong> = <code>100_000_000</code> litoshis (same scale as satoshis on Bitcoin)</li>
+        <li>API balances are usually in litoshis (integer)</li>
+      </ul>
+    </div>
+
+    <!-- PT -->
+    <div id="lang-pt" class="lang-block">
+      <h1>APIs públicas de <em>Litecoin</em> usadas no OpS Crypt</h1>
+      <p class="lead">
+        Documentação dos endpoints da rede Litecoin na internet que alimentam saldo, UTXOs, histórico e transmissão no OpS Crypt LTC.
+        Esta página é documentação — não é um backend que guarda chaves.
+      </p>
+      <div class="notice">
+        <strong>Importante:</strong> o OpS Crypt é não-custodial. Chaves privadas <em>nunca</em> vão para essas APIs.
+        Só endereços públicos e transações já assinadas trafegam na internet.
+      </div>
+
+      <h2>1. Links oficiais do projeto</h2>
+      <div class="card url-list">
+        <a href="https://elevbit-ai.github.io/ops-crypt-ltc/">Site (sobre o produto)</a>
+        <a href="https://elevbit-ai.github.io/ops-crypt-ltc/api.html">Referência de API (esta página)</a>
+        <a href="https://elevbit-ai.github.io/ops-crypt-ltc/tutorial.html">Tutorial completo EN/PT</a>
+        <a href="https://elevbit-ai.github.io/ops-crypt-ltc/playground.html">Playground ao vivo</a>
+        <a href="https://github.com/elevbit-ai/ops-crypt-ltc">Código no GitHub</a>
+        <a href="https://github.com/elevbit-ai/ops-crypt-ltc/blob/main/src/lib/ltc-api.js">Código do cliente API</a>
+      </div>
+
+      <h2>2. Provedores (ordem de fallback)</h2>
+      <table>
+        <thead><tr><th>#</th><th>Provedor</th><th>URL base</th><th>Função</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Litecoin Space</td><td><code>https://litecoinspace.org/api</code></td><td>Principal</td></tr>
+          <tr><td>2</td><td>BlockCypher</td><td><code>https://api.blockcypher.com/v1/ltc/main</code></td><td>Reserva</td></tr>
+          <tr><td>3</td><td>Blockchair</td><td><code>https://api.blockchair.com/litecoin</code></td><td>Reserva</td></tr>
+          <tr><td>—</td><td>Coinbase / CoinGecko</td><td>APIs de preço</td><td>Só cotação USD</td></tr>
+        </tbody>
+      </table>
+
+      <h2>3. Catálogo de endpoints</h2>
+      <div class="card">
+        <h3><span class="method">GET</span> Saldo do endereço</h3>
+        <pre>https://litecoinspace.org/api/address/{ENDERECO}
+https://api.blockcypher.com/v1/ltc/main/addrs/{ENDERECO}/balance
+https://api.blockchair.com/litecoin/dashboards/address/{ENDERECO}</pre>
+      </div>
+      <div class="card">
+        <h3><span class="method">GET</span> UTXOs</h3>
+        <pre>https://litecoinspace.org/api/address/{ENDERECO}/utxo
+https://api.blockcypher.com/v1/ltc/main/addrs/{ENDERECO}?unspentOnly=true&includeScript=true</pre>
+      </div>
+      <div class="card">
+        <h3><span class="method post">POST</span> Transmitir transação assinada</h3>
+        <pre>POST https://litecoinspace.org/api/tx
+Corpo: hex da tx (text/plain)
+
+POST https://api.blockcypher.com/v1/ltc/main/txs/push
+Corpo: {"tx":"<hex>"}</pre>
+        <p>Só a transação já assinada — nunca a chave privada.</p>
+      </div>
+
+      <h2>4. Exemplo (curl)</h2>
+      <pre>curl -s "https://api.blockcypher.com/v1/ltc/main/addrs/ENDERECO_LTC/balance"</pre>
+
+      <h2>5. Teste ao vivo (saldo)</h2>
+      <p>Cole um endereço Litecoin público (não a chave privada):</p>
+      <div class="try">
+        <input id="addr-pt" placeholder="ltc1... ou L..." spellcheck="false" />
+        <button type="button" id="go-pt">Consultar saldo</button>
+      </div>
+      <pre id="live-out-pt">O resultado aparece aqui…</pre>
+
+      <h2>6. Unidades</h2>
+      <ul>
+        <li><strong>1 LTC</strong> = <code>100_000_000</code> litoshis</li>
+        <li>Saldos das APIs costumam vir em litoshis (inteiro)</li>
+      </ul>
+    </div>
+
+    <footer>
+      OpS Crypt LTC · API docs · © Joaquim Pedro de Morais Filho ·
+      <a href="https://usacomment.com">USAcomment.com</a> ·
+      <a href="mailto:zicutake@mail.ru">zicutake@mail.ru</a>
+    </footer>
+  </div>
+  <script>
+    const en=document.getElementById("lang-en"),pt=document.getElementById("lang-pt");
+    const btnEn=document.getElementById("btn-en"),btnPt=document.getElementById("btn-pt");
+    function setLang(l){const isEn=l==="en";en.classList.toggle("on",isEn);pt.classList.toggle("on",!isEn);btnEn.classList.toggle("on",isEn);btnPt.classList.toggle("on",!isEn);document.documentElement.lang=isEn?"en":"pt-BR";localStorage.setItem("ops_api_lang",l)}
+    btnEn.onclick=()=>setLang("en");btnPt.onclick=()=>setLang("pt");
+    const s=localStorage.getItem("ops_api_lang");if(s==="pt"||(!s&&navigator.language?.toLowerCase().startsWith("pt")))setLang("pt");
+
+    async function queryBalance(addr, outEl) {
+      outEl.textContent = "Loading…";
+      const a = (addr||"").trim();
+      if (!a) { outEl.textContent = "Enter an address."; return; }
+      const urls = [
+        "https://api.blockcypher.com/v1/ltc/main/addrs/" + encodeURIComponent(a) + "/balance",
+        "https://litecoinspace.org/api/address/" + encodeURIComponent(a),
+      ];
+      let lastErr = "";
+      for (const u of urls) {
+        try {
+          const r = await fetch(u);
+          const t = await r.text();
+          outEl.textContent = "URL: " + u + "\nHTTP " + r.status + "\n\n" + t;
+          if (r.ok) return;
+          lastErr = t;
+        } catch (e) { lastErr = String(e); }
+      }
+      outEl.textContent = "Failed: " + lastErr;
+    }
+    document.getElementById("go-en").onclick = () => queryBalance(document.getElementById("addr-en").value, document.getElementById("live-out"));
+    document.getElementById("go-pt").onclick = () => queryBalance(document.getElementById("addr-pt").value, document.getElementById("live-out-pt"));
+  </script>
+</body>
+</html>

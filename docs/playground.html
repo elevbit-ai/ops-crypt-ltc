@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OpS Crypt LTC — Live API Playground</title>
+  <meta name="description" content="Live browser playground for public Litecoin APIs used by OpS Crypt LTC." />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700;9..40,800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root{--bg:#07090f;--card:#11151e;--border:#252b38;--ltc:#345c9c;--ltc2:#7aafff;--text:#eef2f8;--muted:#94a0b8;--font:"DM Sans",system-ui,sans-serif;--mono:"JetBrains Mono",monospace}
+    *{box-sizing:border-box;margin:0;padding:0}body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.55;min-height:100vh}
+    body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse 70% 40% at 50% -8%,rgba(52,92,156,.22),transparent 55%)}
+    .page{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:0 1.2rem 3rem}
+    a{color:var(--ltc2)}nav{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:space-between;align-items:center;padding:1.1rem 0;border-bottom:1px solid var(--border);margin-bottom:1.25rem}
+    .brand{display:flex;gap:.5rem;align-items:center;color:var(--text);text-decoration:none;font-weight:800}
+    .mark{width:34px;height:34px;border-radius:9px;background:linear-gradient(145deg,#6ba3f0,var(--ltc));display:grid;place-items:center}
+    .links a{color:var(--muted);text-decoration:none;font-size:.85rem;padding:.35rem .65rem;border-radius:999px;margin-left:.15rem}
+    .links a:hover{background:var(--card);color:var(--text)}
+    h1{font-size:1.6rem;margin-bottom:.4rem}
+    .lead{color:var(--muted);margin-bottom:1rem;font-size:.95rem}
+    .notice{background:rgba(52,92,156,.12);border:1px solid rgba(122,175,255,.25);border-radius:12px;padding:.8rem 1rem;color:var(--muted);font-size:.88rem;margin-bottom:1.2rem}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.1rem;margin-bottom:1rem}
+    label{display:block;font-size:.8rem;color:var(--muted);margin:.5rem 0 .3rem}
+    input,select,textarea{width:100%;background:#0a0d14;border:1px solid var(--border);border-radius:10px;padding:.7rem .85rem;color:var(--text);font:inherit}
+    textarea,pre{font-family:var(--mono);font-size:.78rem}
+    pre{background:#0a0d14;border:1px solid var(--border);border-radius:12px;padding:1rem;overflow:auto;max-height:360px;white-space:pre-wrap;word-break:break-all;color:#c5d4f0;margin-top:.6rem}
+    .row{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.75rem}
+    button{border:0;border-radius:10px;padding:.7rem 1.05rem;background:linear-gradient(135deg,#6ba3f0,var(--ltc));color:#fff;font-weight:700;cursor:pointer}
+    button.ghost{background:transparent;border:1px solid var(--border);color:var(--text)}
+    .ep{font-size:.75rem;color:var(--muted);margin-top:.4rem;word-break:break-all}
+    footer{margin-top:2rem;text-align:center;color:#667;font-size:.8rem}
+  </style>
+</head>
+<body>
+  <div class="page">
+    <nav>
+      <a class="brand" href="./index.html"><span class="mark">Ł</span> API Playground</a>
+      <div class="links">
+        <a href="./index.html">About</a>
+        <a href="./api.html">API docs</a>
+        <a href="./tutorial.html">Tutorial</a>
+        <a href="https://github.com/elevbit-ai/ops-crypt-ltc" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </nav>
+
+    <h1>Live Litecoin API Playground</h1>
+    <p class="lead" id="lead">
+      Call public Litecoin endpoints from your browser. EN/PT docs stay on the other pages.
+      <br/><strong style="color:#7aafff">Never paste private keys or seed phrases here.</strong>
+    </p>
+    <div class="notice">
+      Public demo using third-party APIs (BlockCypher / Litecoin Space). Rate limits may apply. CORS depends on the provider.
+    </div>
+
+    <div class="card">
+      <label for="action">Action / Ação</label>
+      <select id="action">
+        <option value="balance-bc">GET Balance — BlockCypher</option>
+        <option value="balance-space">GET Address — Litecoin Space</option>
+        <option value="utxo-space">GET UTXOs — Litecoin Space</option>
+        <option value="history-bc">GET History — BlockCypher</option>
+        <option value="price">GET LTC-USD price — Coinbase</option>
+      </select>
+
+      <label for="address">Litecoin address (public only)</label>
+      <input id="address" spellcheck="false" placeholder="ltc1... or L..." />
+
+      <p class="ep" id="url-preview">URL will appear here</p>
+
+      <div class="row">
+        <button type="button" id="run">Run request</button>
+        <button type="button" class="ghost" id="fill-sample">Sample address format</button>
+      </div>
+      <pre id="out">Response JSON…</pre>
+    </div>
+
+    <div class="card">
+      <strong>Published links</strong>
+      <p class="ep">
+        <a href="https://elevbit-ai.github.io/ops-crypt-ltc/playground.html">https://elevbit-ai.github.io/ops-crypt-ltc/playground.html</a><br/>
+        <a href="https://elevbit-ai.github.io/ops-crypt-ltc/api.html">https://elevbit-ai.github.io/ops-crypt-ltc/api.html</a><br/>
+        <a href="https://elevbit-ai.github.io/ops-crypt-ltc/tutorial.html">https://elevbit-ai.github.io/ops-crypt-ltc/tutorial.html</a>
+      </p>
+    </div>
+
+    <footer>OpS Crypt LTC · © Joaquim Pedro de Morais Filho · USAcomment.com · zicutake@mail.ru</footer>
+  </div>
+  <script>
+    const action = document.getElementById("action");
+    const address = document.getElementById("address");
+    const preview = document.getElementById("url-preview");
+    const out = document.getElementById("out");
+
+    function buildUrl() {
+      const a = encodeURIComponent(address.value.trim() || "{ADDRESS}");
+      switch (action.value) {
+        case "balance-bc":
+          return "https://api.blockcypher.com/v1/ltc/main/addrs/" + a + "/balance";
+        case "balance-space":
+          return "https://litecoinspace.org/api/address/" + a;
+        case "utxo-space":
+          return "https://litecoinspace.org/api/address/" + a + "/utxo";
+        case "history-bc":
+          return "https://api.blockcypher.com/v1/ltc/main/addrs/" + a + "?limit=10";
+        case "price":
+          return "https://api.coinbase.com/v2/prices/LTC-USD/spot";
+        default:
+          return "";
+      }
+    }
+
+    function refreshPreview() {
+      preview.textContent = "GET " + buildUrl();
+    }
+    action.onchange = refreshPreview;
+    address.oninput = refreshPreview;
+    refreshPreview();
+
+    document.getElementById("fill-sample").onclick = () => {
+      address.value = "LTC_PUBLIC_ADDRESS_HERE";
+      refreshPreview();
+      out.textContent = "Replace with a real public address (never a private key).";
+    };
+
+    document.getElementById("run").onclick = async () => {
+      if (action.value !== "price" && !address.value.trim()) {
+        out.textContent = "Enter a public Litecoin address first.";
+        return;
+      }
+      if (/^[5KLTc6]/i.test(address.value.trim()) && address.value.trim().length > 50) {
+        out.textContent = "That looks like a private key / WIF. Refusing to query. Use a public address only.";
+        return;
+      }
+      const url = buildUrl();
+      out.textContent = "Fetching…\n" + url;
+      try {
+        const res = await fetch(url);
+        const text = await res.text();
+        let pretty = text;
+        try { pretty = JSON.stringify(JSON.parse(text), null, 2); } catch (_) {}
+        out.textContent = "HTTP " + res.status + "\n" + url + "\n\n" + pretty;
+      } catch (e) {
+        out.textContent = "Error (often CORS or network): " + e;
+      }
+    };
+  </script>
+</body>
+</html>
