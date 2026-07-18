@@ -3,27 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>OpS Crypt LTC — Litecoin Wallet | Joaquim Pedro de Morais Filho</title>
-  <meta name="description" content="OpS Crypt LTC is a non-custodial Litecoin wallet with BIP39 seed, encrypted backup, and multi-API support. By Joaquim Pedro de Morais Filho · USAcomment.com" />
+  <title>OpS Crypt LTC — About &amp; Guide | Joaquim Pedro de Morais Filho</title>
+  <meta name="description" content="Official explanation of OpS Crypt LTC: a Litecoin-only non-custodial wallet. English and Portuguese. By Joaquim Pedro de Morais Filho · USAcomment.com" />
   <meta name="author" content="Joaquim Pedro de Morais Filho" />
-  <meta property="og:title" content="OpS Crypt LTC — Litecoin Wallet" />
-  <meta property="og:description" content="Send & receive Litecoin. BIP39 · Trust Wallet compatible seed · Open source." />
-  <meta property="og:type" content="website" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23345c9c' width='100' height='100' rx='20'/><text y='68' x='28' font-size='55' fill='white' font-family='sans-serif' font-weight='bold'>Ł</text></svg>" />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #06070c;
-      --bg2: #0d1018;
-      --card: #12161f;
-      --border: #232a38;
+      --bg: #07090f;
+      --card: #11151e;
+      --border: #252b38;
       --ltc: #345c9c;
-      --ltc2: #6ba3f0;
+      --ltc2: #7aafff;
       --text: #eef2f8;
-      --muted: #8b93a7;
+      --muted: #94a0b8;
       --ok: #3ecf8e;
-      --warn: #f0b429;
-      --radius: 18px;
+      --no: #ff7a88;
       --font: "DM Sans", system-ui, sans-serif;
       --serif: "Instrument Serif", Georgia, serif;
     }
@@ -33,411 +28,412 @@
       font-family: var(--font);
       background: var(--bg);
       color: var(--text);
-      line-height: 1.6;
+      line-height: 1.65;
       min-height: 100vh;
     }
     body::before {
       content: "";
-      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
       background:
-        radial-gradient(ellipse 70% 45% at 50% -10%, rgba(52,92,156,.28), transparent 55%),
-        radial-gradient(circle at 90% 80%, rgba(52,92,156,.08), transparent 40%);
+        radial-gradient(ellipse 80% 40% at 50% -5%, rgba(52,92,156,.22), transparent 55%);
     }
-    .wrap { position: relative; z-index: 1; max-width: 1000px; margin: 0 auto; padding: 0 1.25rem 4rem; }
-    a { color: var(--ltc2); text-decoration: none; }
+    .page { position: relative; z-index: 1; max-width: 780px; margin: 0 auto; padding: 0 1.25rem 4rem; }
+    a { color: var(--ltc2); }
     a:hover { text-decoration: underline; }
 
-    /* Nav */
     nav {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 1.1rem 0; gap: 1rem; flex-wrap: wrap;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 2rem;
-      position: sticky; top: 0;
-      background: rgba(6,7,12,.85);
-      backdrop-filter: blur(12px);
-      z-index: 20;
+      padding: 1.25rem 0 1rem; margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border); flex-wrap: wrap; gap: .75rem;
     }
-    .nav-brand { display: flex; align-items: center; gap: .65rem; font-weight: 800; color: var(--text); text-decoration: none; }
-    .nav-brand:hover { text-decoration: none; }
+    .brand {
+      display: flex; align-items: center; gap: .6rem;
+      color: var(--text); text-decoration: none; font-weight: 800;
+    }
+    .brand:hover { text-decoration: none; }
     .mark {
-      width: 36px; height: 36px; border-radius: 10px;
-      background: linear-gradient(145deg, var(--ltc2), var(--ltc));
-      display: grid; place-items: center; font-weight: 800; font-size: 1.1rem;
-      box-shadow: 0 6px 20px rgba(52,92,156,.4);
+      width: 38px; height: 38px; border-radius: 11px;
+      background: linear-gradient(145deg, #6ba3f0, var(--ltc));
+      display: grid; place-items: center; font-weight: 800;
+      box-shadow: 0 6px 18px rgba(52,92,156,.4);
     }
-    .nav-links { display: flex; gap: .5rem; align-items: center; flex-wrap: wrap; }
-    .nav-links a {
-      color: var(--muted); font-size: .9rem; font-weight: 500;
-      padding: .4rem .7rem; border-radius: 999px; text-decoration: none;
+    .nav-right { display: flex; gap: .5rem; align-items: center; flex-wrap: wrap; }
+    .pill {
+      font-size: .8rem; color: var(--muted); border: 1px solid var(--border);
+      border-radius: 999px; padding: .35rem .75rem; text-decoration: none;
     }
-    .nav-links a:hover { color: var(--text); background: var(--card); text-decoration: none; }
-    .lang-switch {
+    .pill:hover { color: var(--text); text-decoration: none; background: var(--card); }
+    .lang {
       display: inline-flex; border: 1px solid var(--border); border-radius: 999px; overflow: hidden;
     }
-    .lang-switch button {
-      border: none; background: transparent; color: var(--muted);
-      padding: .4rem .75rem; font: inherit; font-size: .8rem; font-weight: 600; cursor: pointer;
+    .lang button {
+      border: 0; background: transparent; color: var(--muted);
+      font: inherit; font-size: .8rem; font-weight: 700;
+      padding: .4rem .7rem; cursor: pointer;
     }
-    .lang-switch button.on { background: var(--ltc); color: #fff; }
+    .lang button.on { background: var(--ltc); color: #fff; }
 
-    /* Hero */
-    .hero { padding: 2.5rem 0 2rem; text-align: center; }
-    .badge {
-      display: inline-flex; align-items: center; gap: .4rem;
-      background: rgba(52,92,156,.15); border: 1px solid rgba(107,163,240,.3);
-      color: var(--ltc2); font-size: .78rem; font-weight: 600;
-      padding: .35rem .85rem; border-radius: 999px; margin-bottom: 1.1rem;
+    .notice {
+      background: rgba(52,92,156,.12);
+      border: 1px solid rgba(122,175,255,.25);
+      border-radius: 14px; padding: .85rem 1rem;
+      font-size: .9rem; color: var(--muted); margin-bottom: 2rem;
     }
-    .hero h1 {
+    .notice strong { color: var(--ltc2); }
+
+    header.hero { margin-bottom: 2.25rem; }
+    header.hero h1 {
       font-family: var(--serif);
-      font-size: clamp(2.2rem, 6vw, 3.4rem);
-      font-weight: 400; line-height: 1.15;
-      letter-spacing: -.02em; margin-bottom: .85rem;
+      font-size: clamp(2rem, 5.5vw, 2.85rem);
+      font-weight: 400; line-height: 1.2; margin-bottom: .75rem;
     }
-    .hero h1 em { font-style: italic; color: var(--ltc2); }
-    .hero-lead {
-      max-width: 560px; margin: 0 auto 1.5rem;
-      color: var(--muted); font-size: 1.05rem;
-    }
-    .cta-row { display: flex; gap: .65rem; justify-content: center; flex-wrap: wrap; }
-    .btn {
-      display: inline-flex; align-items: center; gap: .4rem;
-      padding: .75rem 1.25rem; border-radius: 12px;
-      font-weight: 700; font-size: .95rem; text-decoration: none;
-      transition: transform .15s, box-shadow .15s;
-    }
-    .btn:hover { transform: translateY(-1px); text-decoration: none; }
-    .btn-primary {
-      background: linear-gradient(135deg, var(--ltc2), var(--ltc));
-      color: #fff; box-shadow: 0 8px 28px rgba(52,92,156,.35);
-    }
-    .btn-ghost {
-      background: var(--card); color: var(--text);
-      border: 1px solid var(--border);
-    }
+    header.hero h1 em { font-style: italic; color: var(--ltc2); }
+    .lead { color: var(--muted); font-size: 1.05rem; max-width: 36em; }
 
-    /* Grid cards */
-    .section { margin: 2.5rem 0; }
-    .section h2 {
-      font-family: var(--serif); font-size: 1.75rem; font-weight: 400;
-      margin-bottom: .4rem; text-align: center;
+    section { margin: 2.4rem 0; }
+    section h2 {
+      font-family: var(--serif); font-size: 1.55rem; font-weight: 400;
+      margin-bottom: .85rem; padding-bottom: .45rem;
+      border-bottom: 1px solid var(--border);
     }
-    .section .sub {
-      text-align: center; color: var(--muted); margin-bottom: 1.5rem; font-size: .95rem;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1rem;
-    }
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.25rem 1.2rem;
-    }
-    .card .ico {
-      width: 40px; height: 40px; border-radius: 10px;
-      background: rgba(52,92,156,.2); color: var(--ltc2);
-      display: grid; place-items: center; font-size: 1.15rem; margin-bottom: .7rem;
-    }
-    .card h3 { font-size: 1rem; margin-bottom: .35rem; }
-    .card p { color: var(--muted); font-size: .88rem; }
+    section h3 { font-size: 1.02rem; margin: 1.15rem 0 .4rem; color: #fff; }
+    section p, section li { color: var(--muted); font-size: .95rem; }
+    section p + p { margin-top: .7rem; }
+    section ul, section ol { padding-left: 1.25rem; margin-top: .5rem; }
+    section li { margin: .4rem 0; }
+    section strong { color: var(--text); font-weight: 600; }
 
-    /* Two col */
-    .split {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;
-    }
-    @media (max-width: 720px) { .split { grid-template-columns: 1fr; } }
-    .panel {
+    .box {
       background: var(--card); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 1.4rem;
+      border-radius: 16px; padding: 1.15rem 1.25rem; margin-top: 1rem;
     }
-    .panel h3 { margin-bottom: .75rem; font-size: 1.05rem; }
-    .panel ol, .panel ul { padding-left: 1.2rem; color: var(--muted); font-size: .9rem; }
-    .panel li { margin: .4rem 0; }
-    .panel code {
-      font-size: .82em; background: #0a0c12; padding: .1rem .35rem;
-      border-radius: 4px; color: #b8c8e8;
+    .box p:first-child { margin-top: 0; }
+
+    table { width: 100%; border-collapse: collapse; margin-top: .75rem; font-size: .9rem; }
+    th, td {
+      text-align: left; padding: .55rem .4rem;
+      border-bottom: 1px solid var(--border); color: var(--muted); vertical-align: top;
     }
-    table { width: 100%; border-collapse: collapse; font-size: .88rem; }
-    th, td { text-align: left; padding: .55rem .4rem; border-bottom: 1px solid var(--border); color: var(--muted); }
     th { color: var(--text); font-weight: 600; }
-    .ok { color: var(--ok); }
-    .no { color: #ff6b7a; }
+    .ok { color: var(--ok); font-weight: 600; }
+    .no { color: var(--no); font-weight: 600; }
 
     .warn {
-      background: rgba(240,180,41,.08);
-      border: 1px solid rgba(240,180,41,.3);
-      color: #e8c35a;
-      border-radius: 14px; padding: 1rem 1.15rem;
-      font-size: .9rem; margin: 1.5rem 0;
+      margin-top: 1rem;
+      background: rgba(240,180,41,.07);
+      border: 1px solid rgba(240,180,41,.28);
+      color: #e0c05a; border-radius: 14px; padding: 1rem 1.1rem; font-size: .9rem;
     }
 
     .author {
-      display: flex; gap: 1.2rem; align-items: center; flex-wrap: wrap;
-      background: linear-gradient(135deg, #121a2c, var(--card));
-      border: 1px solid rgba(107,163,240,.25);
-      border-radius: var(--radius); padding: 1.5rem;
+      display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;
+      background: linear-gradient(135deg, #121a2a, var(--card));
+      border: 1px solid rgba(122,175,255,.22);
+      border-radius: 16px; padding: 1.25rem;
     }
-    .author-av {
-      width: 64px; height: 64px; border-radius: 50%;
-      background: linear-gradient(145deg, var(--ltc2), var(--ltc));
-      display: grid; place-items: center; font-weight: 800; font-size: 1.2rem;
-      flex-shrink: 0;
+    .av {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: linear-gradient(145deg, #6ba3f0, var(--ltc));
+      display: grid; place-items: center; font-weight: 800; flex-shrink: 0;
     }
-    .author h3 { font-size: 1.15rem; }
-    .author p { color: var(--muted); font-size: .9rem; }
+    .author h3 { margin: 0 0 .25rem; font-size: 1.1rem; color: #fff; border: 0; padding: 0; }
+    .author p { margin: 0; }
 
     footer {
-      margin-top: 3rem; padding-top: 1.5rem;
+      margin-top: 3rem; padding-top: 1.25rem;
       border-top: 1px solid var(--border);
-      text-align: center; color: var(--muted); font-size: .82rem;
+      text-align: center; color: #667; font-size: .8rem;
     }
+
     .lang-block { display: none; }
-    .lang-block.on { display: block; }
+    .lang-block.on { display: block; animation: fade .25s ease; }
+    @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
   </style>
 </head>
 <body>
-  <div class="wrap">
+  <div class="page">
     <nav>
-      <a class="nav-brand" href="#">
-        <div class="mark">Ł</div>
+      <a class="brand" href="#">
+        <span class="mark">Ł</span>
         OpS Crypt LTC
       </a>
-      <div class="nav-links">
-        <a href="#features" data-i18n-nav="features">Features</a>
-        <a href="#how" data-i18n-nav="how">How to use</a>
-        <a href="#compat" data-i18n-nav="compat">Compatibility</a>
-        <a href="#author" data-i18n-nav="author">Author</a>
-        <div class="lang-switch">
+      <div class="nav-right">
+        <a class="pill" href="https://github.com/elevbit-ai/ops-crypt-ltc" target="_blank" rel="noopener">GitHub</a>
+        <div class="lang">
           <button type="button" id="btn-en" class="on">EN</button>
           <button type="button" id="btn-pt">PT</button>
         </div>
       </div>
     </nav>
 
-    <!-- ================= ENGLISH ================= -->
+    <!-- ===================== ENGLISH ===================== -->
     <div id="lang-en" class="lang-block on">
+      <div class="notice">
+        <strong>This is the documentation website only.</strong>
+        It explains the project. It is <em>not</em> the wallet application itself.
+        The source code and build instructions are on
+        <a href="https://github.com/elevbit-ai/ops-crypt-ltc" target="_blank" rel="noopener">GitHub</a>.
+      </div>
+
       <header class="hero">
-        <div class="badge">● Non-custodial · Litecoin mainnet only</div>
-        <h1>Send &amp; receive <em>Litecoin</em><br/>with real keys you control</h1>
-        <p class="hero-lead">
-          OpS Crypt LTC is an open-source Litecoin wallet: BIP39 seed phrases, encrypted device backup,
-          multi-provider blockchain APIs, and a mobile-ready Android package.
+        <h1>What is <em>OpS Crypt LTC</em>?</h1>
+        <p class="lead">
+          OpS Crypt LTC is a <strong>non-custodial Litecoin wallet project</strong>:
+          software that lets a person create real Litecoin keys, receive LTC, send LTC,
+          and back up the wallet — without giving private keys to a bank or exchange.
         </p>
-        <div class="cta-row">
-          <a class="btn btn-primary" id="link-repo-en" href="https://github.com/elevbit-ai/ops-crypt-ltc" target="_blank" rel="noopener">View on GitHub</a>
-          <a class="btn btn-ghost" href="#how">Read the guide</a>
-        </div>
       </header>
 
-      <section class="section" id="features">
-        <h2>Features</h2>
-        <p class="sub">Built for real Litecoin — not a multi-chain gimmick</p>
-        <div class="grid">
-          <div class="card">
-            <div class="ico">🔑</div>
-            <h3>Real BIP39 wallets</h3>
-            <p>Generate a 12-word seed or import an existing phrase / WIF. Keys stay on your device.</p>
-          </div>
-          <div class="card">
-            <div class="ico">☁</div>
-            <h3>Encrypted backup</h3>
-            <p>Download or upload a <code>.opsjson</code> vault protected with AES-256-GCM + PBKDF2 (PIN).</p>
-          </div>
-          <div class="card">
-            <div class="ico">📡</div>
-            <h3>Live Litecoin APIs</h3>
-            <p>Balance, UTXOs, history and broadcast via litecoinspace, BlockCypher and Blockchair fallbacks.</p>
-          </div>
-          <div class="card">
-            <div class="ico">📱</div>
-            <h3>Android APK ready</h3>
-            <p>Capacitor project included so you can build a signed APK for phones.</p>
-          </div>
+      <section>
+        <h2>1. Purpose of this project</h2>
+        <p>
+          The goal is a simple, focused product: <strong>Litecoin only</strong> (LTC mainnet).
+          It is designed to feel like a lightweight crypto wallet for send and receive,
+          with keys generated and stored under the user’s control.
+        </p>
+        <p>
+          The project includes the wallet source code, Android packaging support (APK),
+          and this explanatory website in English and Portuguese.
+        </p>
+      </section>
+
+      <section>
+        <h2>2. What it does (explained simply)</h2>
+        <div class="box">
+          <h3>Create a real wallet</h3>
+          <p>
+            When you create a wallet, the app generates a standard <strong>BIP39 seed phrase</strong>
+            (usually 12 English words). From that seed it derives Litecoin addresses and private keys
+            using industry paths (BIP84 SegWit and BIP44 Legacy).
+          </p>
+          <h3>Receive Litecoin</h3>
+          <p>
+            You show an address (or QR code). Someone sends LTC to that address on the Litecoin network.
+            The app reads public blockchain APIs to show balance and history.
+          </p>
+          <h3>Send Litecoin</h3>
+          <p>
+            You enter a destination address and amount. The transaction is <strong>signed on the device</strong>
+            with your private key, then broadcast through public Litecoin APIs.
+            Servers never receive your seed or private keys for signing.
+          </p>
+          <h3>Backup and restore</h3>
+          <p>
+            You can export an encrypted backup file (<code>.opsjson</code>) protected by a PIN,
+            import a seed phrase, or import a WIF private key. You can also restore from the encrypted backup upload.
+          </p>
         </div>
       </section>
 
-      <section class="section" id="how">
-        <h2>How to use</h2>
-        <p class="sub">Web app or APK — same wallet flow</p>
-        <div class="split">
-          <div class="panel">
-            <h3>1. Create or import</h3>
-            <ol>
-              <li>Set a 6-digit PIN (encrypts the seed on device).</li>
-              <li><strong>Create</strong> a new 12-word wallet, or <strong>import</strong> BIP39 / WIF / backup file.</li>
-              <li>Write the seed offline. Never share it.</li>
-            </ol>
-          </div>
-          <div class="panel">
-            <h3>2. Receive &amp; send</h3>
-            <ol>
-              <li><strong>Receive:</strong> show QR for SegWit (<code>ltc1…</code>) or Legacy (<code>L…</code>).</li>
-              <li><strong>Send:</strong> paste LTC address + amount → signed locally → broadcast.</li>
-              <li>Use small amounts first until you are comfortable.</li>
-            </ol>
-          </div>
-        </div>
-        <div class="panel" style="margin-top:1rem">
-          <h3>Developers</h3>
-          <pre style="background:#0a0c12;padding:1rem;border-radius:12px;overflow:auto;font-size:.82rem;color:#b8c8e8;line-height:1.5">git clone &lt;this-repo&gt;
-cd ops-crypt-ltc
-npm install
-npm run dev      # local wallet UI
-npm run build    # production web build
-npx cap sync android</pre>
-        </div>
-      </section>
-
-      <section class="section" id="compat">
-        <h2>Wallet compatibility</h2>
-        <p class="sub">Seed standard used by major multi-coin wallets</p>
-        <div class="panel">
-          <table>
-            <thead>
-              <tr><th>Wallet</th><th>Litecoin via BIP39?</th><th>Notes</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Trust Wallet</td><td class="ok">Yes</td><td>Import seed → enable Litecoin. Legacy path m/44'/2'/0'/0/0</td></tr>
-              <tr><td>Exodus / multi-wallets</td><td class="ok">Usually yes</td><td>Import recovery phrase</td></tr>
-              <tr><td>Electrum-LTC</td><td class="ok">Via WIF</td><td>Export WIF from OpS Crypt settings</td></tr>
-              <tr><td>MetaMask</td><td class="no">No</td><td>Ethereum / EVM only — not Litecoin</td></tr>
-            </tbody>
-          </table>
-        </div>
+      <section>
+        <h2>3. Security model (plain language)</h2>
+        <ul>
+          <li><strong>Non-custodial:</strong> you hold the keys; the project author does not hold your coins.</li>
+          <li><strong>PIN encryption:</strong> the seed/keys on the device are stored encrypted (AES-256-GCM with PBKDF2).</li>
+          <li><strong>Local signing:</strong> private keys are used only on the device to sign transactions.</li>
+          <li><strong>Public APIs:</strong> only public addresses and already-signed transactions are sent to network APIs.</li>
+          <li><strong>Your responsibility:</strong> if you lose the seed and backup, nobody can recover the funds — not even the author.</li>
+        </ul>
         <div class="warn">
-          <strong>Security:</strong> This is non-custodial software. You are responsible for backups and verifying addresses.
-          Never enter your seed on unknown websites. The author cannot recover lost PINs or seeds.
+          Never type your seed phrase on unknown websites. Never share your PIN, seed, or WIF.
+          Always verify the address before sending real value. Start with small amounts.
         </div>
       </section>
 
-      <section class="section" id="author">
-        <h2>Author</h2>
-        <p class="sub">Open project by</p>
+      <section>
+        <h2>4. Compatibility with other wallets</h2>
+        <p>
+          The seed uses the common <strong>BIP39</strong> standard. That means you can often import the same phrase
+          into other wallets that support Litecoin.
+        </p>
+        <table>
+          <thead>
+            <tr><th>Wallet</th><th>Works with OpS seed/LTC?</th><th>Explanation</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Trust Wallet</td>
+              <td class="ok">Yes</td>
+              <td>Import the 12 words, enable Litecoin. Legacy path often matches.</td>
+            </tr>
+            <tr>
+              <td>Exodus and similar multi-coin wallets</td>
+              <td class="ok">Usually yes</td>
+              <td>Import recovery phrase if Litecoin is supported.</td>
+            </tr>
+            <tr>
+              <td>Electrum-LTC</td>
+              <td class="ok">Via WIF</td>
+              <td>Export WIF from OpS Crypt and import there.</td>
+            </tr>
+            <tr>
+              <td>MetaMask</td>
+              <td class="no">No</td>
+              <td>MetaMask is for Ethereum/EVM chains only. It does <strong>not</strong> support Litecoin.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>5. What this website is — and is not</h2>
+        <div class="box">
+          <p><strong>This website is:</strong> an official explanation of OpS Crypt LTC (EN/PT), authorship, safety notes, and how the product works.</p>
+          <p style="margin-top:.7rem"><strong>This website is not:</strong> the wallet program, a place to enter your seed, or a place to send/receive coins.</p>
+          <p style="margin-top:.7rem">
+            To run or build the program, use the repository:
+            <a href="https://github.com/elevbit-ai/ops-crypt-ltc" target="_blank" rel="noopener">github.com/elevbit-ai/ops-crypt-ltc</a>
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2>6. Author</h2>
         <div class="author">
-          <div class="author-av">JP</div>
+          <div class="av">JP</div>
           <div>
             <h3>Joaquim Pedro de Morais Filho</h3>
             <p>
-              Creator of OpS Crypt LTC · USAcomment.com<br/>
-              Contact: <a href="mailto:zicutake@mail.ru">zicutake@mail.ru</a> ·
-              Web: <a href="https://usacomment.com" target="_blank" rel="noopener">usacomment.com</a>
+              Creator of OpS Crypt LTC<br/>
+              Website: <a href="https://usacomment.com" target="_blank" rel="noopener">USAcomment.com</a><br/>
+              Email: <a href="mailto:zicutake@mail.ru">zicutake@mail.ru</a>
             </p>
           </div>
         </div>
       </section>
     </div>
 
-    <!-- ================= PORTUGUESE ================= -->
+    <!-- ===================== PORTUGUESE ===================== -->
     <div id="lang-pt" class="lang-block">
+      <div class="notice">
+        <strong>Este é apenas o site explicativo.</strong>
+        Ele descreve o projeto. <em>Não</em> é o programa da carteira.
+        O código-fonte e as instruções de build estão no
+        <a href="https://github.com/elevbit-ai/ops-crypt-ltc" target="_blank" rel="noopener">GitHub</a>.
+      </div>
+
       <header class="hero">
-        <div class="badge">● Não-custodial · Somente Litecoin mainnet</div>
-        <h1>Envie e receba <em>Litecoin</em><br/>com chaves reais sob seu controle</h1>
-        <p class="hero-lead">
-          OpS Crypt LTC é uma carteira Litecoin de código aberto: seed BIP39, backup criptografado no aparelho,
-          APIs da rede Litecoin com fallback e projeto Android (APK).
+        <h1>O que é o <em>OpS Crypt LTC</em>?</h1>
+        <p class="lead">
+          OpS Crypt LTC é um <strong>projeto de carteira Litecoin não-custodial</strong>:
+          um software que permite criar chaves reais de Litecoin, receber LTC, enviar LTC
+          e fazer backup — sem entregar a chave privada a um banco ou corretora.
         </p>
-        <div class="cta-row">
-          <a class="btn btn-primary" id="link-repo-pt" href="https://github.com/elevbit-ai/ops-crypt-ltc" target="_blank" rel="noopener">Ver no GitHub</a>
-          <a class="btn btn-ghost" href="#how-pt">Ler o guia</a>
-        </div>
       </header>
 
-      <section class="section" id="features-pt">
-        <h2>Recursos</h2>
-        <p class="sub">Feito para Litecoin de verdade</p>
-        <div class="grid">
-          <div class="card">
-            <div class="ico">🔑</div>
-            <h3>Carteira BIP39 real</h3>
-            <p>Gere 12 palavras ou importe seed / WIF. As chaves ficam no seu dispositivo.</p>
-          </div>
-          <div class="card">
-            <div class="ico">☁</div>
-            <h3>Backup criptografado</h3>
-            <p>Baixe ou envie um arquivo <code>.opsjson</code> com AES-256-GCM + PBKDF2 (PIN).</p>
-          </div>
-          <div class="card">
-            <div class="ico">📡</div>
-            <h3>APIs Litecoin ao vivo</h3>
-            <p>Saldo, UTXOs, histórico e broadcast: litecoinspace, BlockCypher e Blockchair.</p>
-          </div>
-          <div class="card">
-            <div class="ico">📱</div>
-            <h3>APK Android</h3>
-            <p>Projeto Capacitor incluso para gerar e assinar o APK.</p>
-          </div>
+      <section>
+        <h2>1. Objetivo do projeto</h2>
+        <p>
+          O foco é um produto simples: <strong>somente Litecoin</strong> (rede mainnet).
+          A ideia é uma carteira leve para enviar e receber, com chaves geradas e guardadas
+          sob controle do usuário.
+        </p>
+        <p>
+          O repositório inclui o código da carteira, suporte a empacotamento Android (APK)
+          e este site explicativo em inglês e português.
+        </p>
+      </section>
+
+      <section>
+        <h2>2. O que ele faz (explicado de forma simples)</h2>
+        <div class="box">
+          <h3>Criar uma carteira real</h3>
+          <p>
+            Ao criar a carteira, o app gera uma <strong>frase-semente BIP39</strong>
+            (em geral 12 palavras em inglês). A partir dela deriva endereços e chaves Litecoin
+            com caminhos padrão (BIP84 SegWit e BIP44 Legacy).
+          </p>
+          <h3>Receber Litecoin</h3>
+          <p>
+            Você mostra um endereço (ou QR). Alguém envia LTC para esse endereço na rede Litecoin.
+            O app consulta APIs públicas da blockchain para mostrar saldo e histórico.
+          </p>
+          <h3>Enviar Litecoin</h3>
+          <p>
+            Você informa o endereço de destino e o valor. A transação é <strong>assinada no aparelho</strong>
+            com a chave privada e depois transmitida por APIs públicas.
+            Os servidores não recebem a seed nem a chave privada para assinar.
+          </p>
+          <h3>Backup e restauração</h3>
+          <p>
+            É possível exportar um arquivo de backup criptografado (<code>.opsjson</code>) com PIN,
+            importar frase-semente, importar WIF, ou restaurar pelo upload do backup.
+          </p>
         </div>
       </section>
 
-      <section class="section" id="how-pt">
-        <h2>Como usar</h2>
-        <p class="sub">App web ou APK — o mesmo fluxo</p>
-        <div class="split">
-          <div class="panel">
-            <h3>1. Criar ou importar</h3>
-            <ol>
-              <li>Defina um PIN de 6 dígitos (criptografa a seed no aparelho).</li>
-              <li><strong>Crie</strong> uma carteira de 12 palavras ou <strong>importe</strong> BIP39 / WIF / backup.</li>
-              <li>Anote a seed offline. Nunca compartilhe.</li>
-            </ol>
-          </div>
-          <div class="panel">
-            <h3>2. Receber e enviar</h3>
-            <ol>
-              <li><strong>Receber:</strong> QR SegWit (<code>ltc1…</code>) ou Legacy (<code>L…</code>).</li>
-              <li><strong>Enviar:</strong> endereço + valor → assina localmente → transmite.</li>
-              <li>Comece com valores pequenos até dominar o fluxo.</li>
-            </ol>
-          </div>
-        </div>
-        <div class="panel" style="margin-top:1rem">
-          <h3>Desenvolvedores</h3>
-          <pre style="background:#0a0c12;padding:1rem;border-radius:12px;overflow:auto;font-size:.82rem;color:#b8c8e8;line-height:1.5">git clone &lt;este-repo&gt;
-cd ops-crypt-ltc
-npm install
-npm run dev      # interface local
-npm run build    # build web de produção
-npx cap sync android</pre>
-        </div>
-      </section>
-
-      <section class="section" id="compat-pt">
-        <h2>Compatibilidade</h2>
-        <p class="sub">Padrão de seed usado por carteiras multi-moeda</p>
-        <div class="panel">
-          <table>
-            <thead>
-              <tr><th>Carteira</th><th>Litecoin via BIP39?</th><th>Notas</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Trust Wallet</td><td class="ok">Sim</td><td>Importar seed → ativar Litecoin. Caminho Legacy m/44'/2'/0'/0/0</td></tr>
-              <tr><td>Exodus / multi-wallets</td><td class="ok">Em geral sim</td><td>Importar frase de recuperação</td></tr>
-              <tr><td>Electrum-LTC</td><td class="ok">Via WIF</td><td>Exporte WIF nas configurações do OpS Crypt</td></tr>
-              <tr><td>MetaMask</td><td class="no">Não</td><td>Só Ethereum/EVM — não suporta Litecoin</td></tr>
-            </tbody>
-          </table>
-        </div>
+      <section>
+        <h2>3. Modelo de segurança (linguagem clara)</h2>
+        <ul>
+          <li><strong>Não-custodial:</strong> você detém as chaves; o autor do projeto não guarda suas moedas.</li>
+          <li><strong>Criptografia com PIN:</strong> seed/chaves no aparelho ficam cifradas (AES-256-GCM + PBKDF2).</li>
+          <li><strong>Assinatura local:</strong> a chave privada só é usada no dispositivo.</li>
+          <li><strong>APIs públicas:</strong> só endereço público e transação já assinada vão para a rede.</li>
+          <li><strong>Sua responsabilidade:</strong> se perder a seed e o backup, ninguém recupera os fundos — nem o autor.</li>
+        </ul>
         <div class="warn">
-          <strong>Segurança:</strong> software não-custodial. Você é responsável pelo backup e por conferir endereços.
-          Nunca digite a seed em sites desconhecidos. O autor não recupera PIN ou seed perdidos.
+          Nunca digite a seed em sites desconhecidos. Não compartilhe PIN, seed ou WIF.
+          Confira sempre o endereço antes de enviar valor real. Comece com valores pequenos.
         </div>
       </section>
 
-      <section class="section" id="author-pt">
-        <h2>Autor</h2>
-        <p class="sub">Projeto aberto por</p>
+      <section>
+        <h2>4. Compatibilidade com outras carteiras</h2>
+        <p>
+          A seed usa o padrão comum <strong>BIP39</strong>. Por isso, em muitos casos, a mesma frase
+          pode ser importada em outras carteiras que suportam Litecoin.
+        </p>
+        <table>
+          <thead>
+            <tr><th>Carteira</th><th>Funciona com a seed/LTC do OpS?</th><th>Explicação</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Trust Wallet</td>
+              <td class="ok">Sim</td>
+              <td>Importe as 12 palavras e ative Litecoin. O caminho Legacy costuma coincidir.</td>
+            </tr>
+            <tr>
+              <td>Exodus e multi-carteiras similares</td>
+              <td class="ok">Em geral sim</td>
+              <td>Importe a frase de recuperação se houver suporte a LTC.</td>
+            </tr>
+            <tr>
+              <td>Electrum-LTC</td>
+              <td class="ok">Via WIF</td>
+              <td>Exporte o WIF no OpS Crypt e importe lá.</td>
+            </tr>
+            <tr>
+              <td>MetaMask</td>
+              <td class="no">Não</td>
+              <td>MetaMask é só Ethereum/EVM. <strong>Não</strong> suporta Litecoin.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>5. O que este site é — e o que não é</h2>
+        <div class="box">
+          <p><strong>Este site é:</strong> a explicação oficial do OpS Crypt LTC (EN/PT), autoria, segurança e funcionamento do produto.</p>
+          <p style="margin-top:.7rem"><strong>Este site não é:</strong> o programa da carteira, nem um lugar para digitar seed, nem para enviar/receber moedas.</p>
+          <p style="margin-top:.7rem">
+            Para rodar ou compilar o programa, use o repositório:
+            <a href="https://github.com/elevbit-ai/ops-crypt-ltc" target="_blank" rel="noopener">github.com/elevbit-ai/ops-crypt-ltc</a>
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2>6. Autor</h2>
         <div class="author">
-          <div class="author-av">JP</div>
+          <div class="av">JP</div>
           <div>
             <h3>Joaquim Pedro de Morais Filho</h3>
             <p>
-              Criador do OpS Crypt LTC · USAcomment.com<br/>
-              Contato: <a href="mailto:zicutake@mail.ru">zicutake@mail.ru</a> ·
-              Web: <a href="https://usacomment.com" target="_blank" rel="noopener">usacomment.com</a>
+              Criador do OpS Crypt LTC<br/>
+              Site: <a href="https://usacomment.com" target="_blank" rel="noopener">USAcomment.com</a><br/>
+              E-mail: <a href="mailto:zicutake@mail.ru">zicutake@mail.ru</a>
             </p>
           </div>
         </div>
@@ -445,9 +441,9 @@ npx cap sync android</pre>
     </div>
 
     <footer>
-      OpS Crypt LTC · © Joaquim Pedro de Morais Filho ·
-      <a href="https://usacomment.com">USAcomment.com</a> · MIT License<br/>
-      Litecoin is a trademark of its respective owners. Not affiliated with MetaMask or Trust Wallet.
+      OpS Crypt LTC · Documentation site only · © Joaquim Pedro de Morais Filho ·
+      <a href="https://usacomment.com">USAcomment.com</a><br/>
+      Source code: <a href="https://github.com/elevbit-ai/ops-crypt-ltc">GitHub</a> · MIT License
     </footer>
   </div>
 
@@ -463,16 +459,14 @@ npx cap sync android</pre>
       btnEn.classList.toggle("on", isEn);
       btnPt.classList.toggle("on", !isEn);
       document.documentElement.lang = isEn ? "en" : "pt-BR";
-      localStorage.setItem("ops_crypt_lang", lang);
+      localStorage.setItem("ops_crypt_docs_lang", lang);
     }
     btnEn.onclick = () => setLang("en");
     btnPt.onclick = () => setLang("pt");
-    const saved = localStorage.getItem("ops_crypt_lang");
-    if (saved === "pt" || (!saved && navigator.language && navigator.language.startsWith("pt"))) {
+    const saved = localStorage.getItem("ops_crypt_docs_lang");
+    if (saved === "pt" || (!saved && navigator.language && navigator.language.toLowerCase().startsWith("pt"))) {
       setLang("pt");
     }
-    // Repo links filled after publish if needed
-    const repo = document.querySelector('meta[name="github-repo"]')?.content;
   </script>
 </body>
 </html>

@@ -9,8 +9,11 @@
 > **Author:** Joaquim Pedro de Morais Filho  
 > **Web:** [USAcomment.com](https://usacomment.com) · **Email:** zicutake@mail.ru  
 
-🌐 **Project website (EN / PT):** [elevbit-ai.github.io/ops-crypt-ltc](https://elevbit-ai.github.io/ops-crypt-ltc/)  
-📦 **Repository:** [github.com/elevbit-ai/ops-crypt-ltc](https://github.com/elevbit-ai/ops-crypt-ltc)  
+🌐 **Explanatory website only (EN / PT — not the wallet app):**  
+[elevbit-ai.github.io/ops-crypt-ltc](https://elevbit-ai.github.io/ops-crypt-ltc/)  
+
+📦 **Source code (the program):**  
+[github.com/elevbit-ai/ops-crypt-ltc](https://github.com/elevbit-ai/ops-crypt-ltc)  
 
 ---
 
