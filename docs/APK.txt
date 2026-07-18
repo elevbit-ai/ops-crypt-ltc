@@ -1,0 +1,27 @@
+OpS Crypt LTC v2 — Gerar APK
+============================
+Criador: Joaquim Pedro de Morais Filho
+USAcomment.com · zicutake@mail.ru
+
+IMPORTANTE: o build Android precisa de JDK 11 ou 17.
+Neste PC foi detectado Java 8 — use o JDK embutido do Android Studio.
+
+Passos:
+1) Instale Android Studio: https://developer.android.com/studio
+2) Abra o projeto: C:\Users\franc\ops-crypt-ltc\android
+   ou rode: npx cap open android
+3) No Android Studio o JDK JBR (17) já vem — Build usa ele.
+4) Build > Build Bundle(s) / APK(s) > Build APK(s)
+5) APK: android\app\build\outputs\apk\debug\app-debug.apk
+
+Linha de comando (com JDK 17 do Android Studio), exemplo:
+
+set JAVA_HOME=C:\Program Files\Android\Android Studio\jbr
+cd C:\Users\franc\ops-crypt-ltc
+npm run build
+npx cap sync android
+cd android
+gradlew.bat assembleDebug
+
+Projeto Capacitor já criado em: android/
+Web build em: app/

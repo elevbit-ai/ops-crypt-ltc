@@ -1,0 +1,42 @@
+# Dependencies
+node_modules/
+
+# Build outputs (regenerate with npm run build)
+app/
+dist/
+dist-apk/
+*.apk
+*.aab
+*.ipa
+
+# Android
+android/app/build/
+android/build/
+android/.gradle/
+android/local.properties
+android/captures/
+android/*.jks
+android/*.keystore
+android/ops-crypt-release.jks
+android/key.properties
+*.hprof
+
+# Secrets / local
+.env
+.env.*
+*.pem
+*.p12
+
+# IDE / OS
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+*.log
+
+# Capacitor generated (regenerate with cap sync)
+# Keep android/ project but ignore build
+android/app/src/main/assets/public/
+
+# Optional large wasm in published pages handled via build

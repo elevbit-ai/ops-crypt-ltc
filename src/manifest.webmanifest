@@ -1,0 +1,18 @@
+{
+  "name": "OpS Crypt Litecoin",
+  "short_name": "OpS Crypt",
+  "description": "Carteira Litecoin BIP39 — Joaquim Pedro de Morais Filho · USAcomment.com",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#07070d",
+  "theme_color": "#345c9c",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

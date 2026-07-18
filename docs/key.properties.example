@@ -1,0 +1,4 @@
+storeFile=../ops-crypt-release.jks
+storePassword=CHANGE_ME
+keyAlias=opscrypt
+keyPassword=CHANGE_ME

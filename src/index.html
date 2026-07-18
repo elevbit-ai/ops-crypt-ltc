@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#0a0a12" />
+  <meta name="description" content="OpS Crypt LTC — carteira Litecoin real BIP39. Joaquim Pedro de Morais Filho · USAcomment.com" />
+  <title>OpS Crypt · Litecoin</title>
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="icon" href="./icon.svg" type="image/svg+xml" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- ONBOARD / LOCK -->
+    <section id="view-lock" class="view active">
+      <div class="lock">
+        <div class="logo">Ł</div>
+        <h1>OpS Crypt</h1>
+        <p class="sub">Litecoin real · BIP39 · Mainnet</p>
+        <div id="onboard-steps">
+          <div id="step-pin" class="step">
+            <p class="hint" id="lock-hint">Crie um PIN de 6 dígitos (criptografa a seed neste aparelho).</p>
+            <input id="pin" type="password" inputmode="numeric" maxlength="6" placeholder="PIN 6 dígitos" />
+            <input id="pin2" type="password" inputmode="numeric" maxlength="6" placeholder="Confirmar PIN" class="hidden" />
+            <button class="btn primary" id="btn-pin-next">Continuar</button>
+          </div>
+          <div id="step-create" class="step hidden">
+            <p class="hint">Como deseja iniciar a carteira?</p>
+            <button class="btn primary" id="btn-new">✦ Criar carteira real (12 palavras)</button>
+            <button class="btn ghost" id="btn-import-seed">Importar frase-semente (BIP39)</button>
+            <button class="btn ghost" id="btn-import-wif">Importar chave WIF</button>
+            <button class="btn ghost" id="btn-upload-backup">⬆ Upload backup .opsjson</button>
+            <input type="file" id="file-backup" accept=".opsjson,.json,application/json" class="hidden" />
+          </div>
+          <div id="step-seed-show" class="step hidden">
+            <p class="warn">Anote estas 12 palavras offline. Quem as tiver controla seus LTC. Nunca as envie por e-mail/print na nuvem.</p>
+            <div id="seed-grid" class="seed-grid"></div>
+            <label class="check"><input type="checkbox" id="seed-confirm" /> Guardei a frase com segurança</label>
+            <button class="btn primary" id="btn-seed-done" disabled>Entrar na carteira</button>
+          </div>
+          <div id="step-import" class="step hidden">
+            <p class="hint" id="import-hint">Cole a frase BIP39 (12/24 palavras)</p>
+            <textarea id="import-text" rows="4" placeholder="word1 word2 ..."></textarea>
+            <input id="import-pass" type="password" placeholder="Passphrase opcional (avançado)" />
+            <button class="btn primary" id="btn-import-go">Importar</button>
+            <button class="btn ghost" id="btn-import-cancel">Voltar</button>
+          </div>
+        </div>
+        <p class="creator">Joaquim Pedro de Morais Filho<br/>
+          <a href="https://usacomment.com" target="_blank" rel="noopener">USAcomment.com</a> · zicutake@mail.ru
+        </p>
+      </div>
+    </section>
+
+    <!-- HOME -->
+    <section id="view-home" class="view">
+      <header class="top">
+        <div>
+          <div class="brand">OpS Crypt <span>LTC</span></div>
+          <div class="net" id="api-source">Mainnet</div>
+        </div>
+        <button class="icon" id="btn-settings">⚙</button>
+      </header>
+
+      <div class="balance-card">
+        <div class="lbl">Saldo Litecoin</div>
+        <div class="bal" id="bal">— <small>LTC</small></div>
+        <div class="fiat" id="fiat">≈ — USD</div>
+        <div class="addr-box">
+          <span class="tag">Receber (SegWit)</span>
+          <code id="addr">…</code>
+          <button class="chip" id="copy-addr">Copiar</button>
+        </div>
+        <div class="addr-box legacy">
+          <span class="tag">Legacy (Trust / BIP44)</span>
+          <code id="addr-leg">…</code>
+          <button class="chip" id="copy-leg">Copiar</button>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="act" data-go="receive"><span>↓</span>Receber</button>
+        <button class="act" data-go="send"><span>↑</span>Enviar</button>
+        <button class="act" data-go="history"><span>☰</span>Histórico</button>
+        <button class="act" data-go="backup"><span>☁</span>Backup</button>
+      </div>
+
+      <div class="panel">
+        <div class="ph">Compatibilidade</div>
+        <p class="muted small">
+          Seed BIP39 funciona em <strong>Trust Wallet</strong>, Exodus e outras multi-wallets.
+          <strong>MetaMask não suporta Litecoin</strong> (só Ethereum/EVM).
+        </p>
+      </div>
+
+      <button class="btn ghost full" id="btn-refresh">Atualizar saldo & rede</button>
+      <footer class="foot">OpS Crypt LTC v2 · USAcomment.com</footer>
+    </section>
+
+    <!-- RECEIVE -->
+    <section id="view-receive" class="view">
+      <header class="top">
+        <button class="icon back" data-go="home">←</button>
+        <div class="brand">Receber LTC</div>
+        <span></span>
+      </header>
+      <div class="center">
+        <div id="qr" class="qr"></div>
+        <div class="tabs">
+          <button class="tab on" data-recv="segwit">SegWit ltc1</button>
+          <button class="tab" data-recv="legacy">Legacy L…</button>
+        </div>
+        <code id="recv-addr" class="full-addr"></code>
+        <p class="hint">Envie <strong>somente Litecoin (LTC)</strong>. Outras moedas serão perdidas.</p>
+        <button class="btn primary full" id="recv-copy">Copiar endereço</button>
+      </div>
+    </section>
+
+    <!-- SEND -->
+    <section id="view-send" class="view">
+      <header class="top">
+        <button class="icon back" data-go="home">←</button>
+        <div class="brand">Enviar LTC</div>
+        <span></span>
+      </header>
+      <div class="form">
+        <label>Endereço destino (LTC)</label>
+        <input id="send-to" spellcheck="false" placeholder="ltc1... ou L..." />
+        <label>Valor (LTC)</label>
+        <input id="send-amt" type="number" step="0.00000001" min="0" placeholder="0.00" />
+        <label>Taxa (sat/vB)</label>
+        <input id="send-fee-rate" type="number" value="12" min="1" />
+        <p class="hint warn">Assinatura local. APIs: litecoinspace → blockcypher → blockchair.</p>
+        <button class="btn primary full" id="btn-send">Assinar e transmitir</button>
+        <pre id="send-log" class="log"></pre>
+      </div>
+    </section>
+
+    <!-- HISTORY -->
+    <section id="view-history" class="view">
+      <header class="top">
+        <button class="icon back" data-go="home">←</button>
+        <div class="brand">Histórico</div>
+        <span></span>
+      </header>
+      <div id="tx-list" class="tx-list"></div>
+    </section>
+
+    <!-- BACKUP -->
+    <section id="view-backup" class="view">
+      <header class="top">
+        <button class="icon back" data-go="home">←</button>
+        <div class="brand">Backup & segurança</div>
+        <span></span>
+      </header>
+      <div class="form">
+        <p class="hint">Baixe o arquivo criptografado ou exporte a seed/WIF. O upload restaura em outro aparelho com o mesmo PIN.</p>
+        <button class="btn primary full" id="btn-download-backup">⬇ Baixar backup .opsjson</button>
+        <button class="btn ghost full" id="btn-show-seed">Mostrar frase-semente (BIP39)</button>
+        <button class="btn ghost full" id="btn-show-wif">Mostrar WIF (SegWit)</button>
+        <button class="btn ghost full" id="btn-show-wif-leg">Mostrar WIF (Legacy BIP44)</button>
+        <button class="btn danger full" id="btn-wipe">Apagar carteira deste aparelho</button>
+        <div class="panel" style="margin-top:1rem">
+          <div class="ph">Importar em outras carteiras</div>
+          <ol class="muted small">
+            <li><strong>Trust Wallet:</strong> Configurações → Carteiras → Importar → Multi-coin / frase secreta (12 palavras).</li>
+            <li>Ative a conta <strong>Litecoin</strong> na Trust.</li>
+            <li><strong>MetaMask:</strong> não funciona com LTC.</li>
+            <li>Endereço Legacy (BIP44) costuma coincidir com o da Trust.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section id="view-settings" class="view">
+      <header class="top">
+        <button class="icon back" data-go="home">←</button>
+        <div class="brand">Ajustes</div>
+        <span></span>
+      </header>
+      <div class="form">
+        <h3>Sobre</h3>
+        <p class="muted">
+          <strong style="color:#fff">OpS Crypt LTC v2</strong><br/>
+          Criador: Joaquim Pedro de Morais Filho<br/>
+          <a href="https://usacomment.com" target="_blank" rel="noopener">USAcomment.com</a><br/>
+          <a href="mailto:zicutake@mail.ru">zicutake@mail.ru</a><br/>
+          Rede: Litecoin Mainnet · Padrão BIP39
+        </p>
+        <h3>Segurança</h3>
+        <ul class="muted small">
+          <li>Seed criptografada com AES-256-GCM + PBKDF2 (250k iterações)</li>
+          <li>Chaves nunca enviadas aos servidores</li>
+          <li>APIs públicas só leem endereço / transmitem tx assinada</li>
+          <li>Faça backup antes de desinstalar o APK</li>
+        </ul>
+      </div>
+    </section>
+  </div>
+  <div id="toast"></div>
+  <script type="module" src="./main.js"></script>
+</body>
+</html>

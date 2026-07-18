@@ -1,0 +1,11 @@
+{
+  "appId": "com.usacomment.opscryptltc",
+  "appName": "OpS Crypt LTC",
+  "webDir": "app",
+  "server": {
+    "androidScheme": "https"
+  },
+  "android": {
+    "allowMixedContent": true
+  }
+}

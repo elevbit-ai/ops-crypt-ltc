@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OpS Crypt LTC v2 · Tutorial</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Playfair+Display:wght@600&display=swap" rel="stylesheet" />
+  <style>
+    :root { --ltc:#345c9c; --ltc2:#5b8fd9; --bg:#06060c; --card:#12121c; --text:#eef1f7; --muted:#9aa0b5; }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:Inter,system-ui,sans-serif;background:radial-gradient(ellipse 90% 50% at 50% -15%,rgba(52,92,156,.3),transparent 50%),var(--bg);color:var(--text);line-height:1.6}
+    a{color:var(--ltc2)}.wrap{max-width:860px;margin:0 auto;padding:2rem 1.25rem 4rem}
+    header{text-align:center;padding:2rem 0 1.5rem;border-bottom:1px solid #222233;margin-bottom:2rem}
+    .logo{width:64px;height:64px;border-radius:18px;background:linear-gradient(145deg,var(--ltc2),var(--ltc));display:grid;place-items:center;margin:0 auto .8rem;font-size:1.8rem;font-weight:800}
+    h1{font-family:"Playfair Display",serif;font-size:clamp(1.7rem,4vw,2.3rem)}
+    h1 span{color:var(--ltc2)}.tag{color:var(--muted)}
+    .card{background:var(--card);border:1px solid #2a2a3c;border-radius:16px;padding:1.35rem 1.4rem;margin-bottom:1.1rem}
+    h2{font-size:1.1rem;margin-bottom:.6rem}
+    ol,ul{padding-left:1.25rem;color:var(--muted)} li{margin:.35rem 0}
+    code,.path{font-family:ui-monospace,monospace;background:#0c0c14;padding:.15rem .4rem;border-radius:6px;font-size:.85em;color:#c5d4f0}
+    .path{display:block;padding:.7rem 1rem;margin:.6rem 0;word-break:break-all}
+    .btn{display:inline-flex;background:linear-gradient(135deg,var(--ltc2),var(--ltc));color:#fff;text-decoration:none;font-weight:700;padding:.75rem 1.2rem;border-radius:12px;margin:.25rem .25rem 0 0}
+    .warn{background:rgba(240,180,41,.1);border:1px solid rgba(240,180,41,.35);color:#f0c14b;border-radius:12px;padding:1rem;font-size:.92rem}
+    table{width:100%;border-collapse:collapse;font-size:.9rem}
+    th,td{text-align:left;padding:.5rem;border-bottom:1px solid #2a2a3c;color:var(--muted)} th{color:#fff}
+    footer{text-align:center;margin-top:2rem;color:var(--muted);font-size:.85rem}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="logo">Ł</div>
+      <h1>OpS Crypt <span>LTC v2</span></h1>
+      <p class="tag">Carteira real BIP39 · backup · multi-API · APK</p>
+    </header>
+
+    <div class="card">
+      <h2>Criador</h2>
+      <p style="color:var(--muted)">
+        <strong style="color:#fff">Joaquim Pedro de Morais Filho</strong><br/>
+        <a href="https://usacomment.com">USAcomment.com</a> ·
+        <a href="mailto:zicutake@mail.ru">zicutake@mail.ru</a>
+      </p>
+      <p style="margin-top:1rem">
+        <a class="btn" href="../app/index.html">Abrir app</a>
+      </p>
+    </div>
+
+    <div class="card warn">
+      <strong>MetaMask não suporta Litecoin</strong> (só Ethereum/EVM).
+      Use a seed BIP39 na <strong>Trust Wallet</strong>, Exodus, etc., e ative Litecoin.
+      Endereço Legacy (BIP44 m/44'/2'/0'/0/0) costuma ser o da Trust.
+    </div>
+
+    <div class="card">
+      <h2>Recursos v2</h2>
+      <ul>
+        <li>Criar carteira real com <strong>12 palavras BIP39</strong></li>
+        <li>Importar seed ou WIF</li>
+        <li>Upload/download backup criptografado <code>.opsjson</code></li>
+        <li>PIN + AES-256-GCM + PBKDF2 (250k)</li>
+        <li>APIs: litecoinspace.org, BlockCypher, Blockchair</li>
+        <li>Endereços SegWit (ltc1) + Legacy (L…)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Usar o app</h2>
+      <ol>
+        <li>Defina PIN de 6 dígitos</li>
+        <li>Criar carteira ou importar seed/WIF/backup</li>
+        <li>Anote as 12 palavras offline</li>
+        <li>Receba LTC (QR) · Envie com assinatura local</li>
+        <li>Backup → baixar <code>.opsjson</code></li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h2>Gerar APK</h2>
+      <pre class="path" style="white-space:pre-wrap">cd C:\Users\franc\ops-crypt-ltc
+npm install
+npm run build
+npx cap add android
+npx cap sync android
+npx cap open android
+# Android Studio → Build → Build APK(s)</pre>
+    </div>
+
+    <div class="card">
+      <h2>Desenvolvimento</h2>
+      <pre class="path" style="white-space:pre-wrap">npm run dev
+# http://localhost:8080</pre>
+    </div>
+
+    <footer>OpS Crypt LTC · © Joaquim Pedro de Morais Filho · USAcomment.com</footer>
+  </div>
+</body>
+</html>
