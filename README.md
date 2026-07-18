@@ -14,12 +14,14 @@
 | Page | URL |
 |------|-----|
 | **About (EN/PT)** | https://elevbit-ai.github.io/ops-crypt-ltc/ |
+| **Download signed APK** | https://elevbit-ai.github.io/ops-crypt-ltc/download.html |
+| **Release APK (direct)** | https://github.com/elevbit-ai/ops-crypt-ltc/releases/download/v1.0.0/OpS-Crypt-LTC-v1.0.0-release-signed.apk |
+| **GitHub Releases** | https://github.com/elevbit-ai/ops-crypt-ltc/releases/tag/v1.0.0 |
 | **API reference** | https://elevbit-ai.github.io/ops-crypt-ltc/api.html |
 | **Tutorial** | https://elevbit-ai.github.io/ops-crypt-ltc/tutorial.html |
 | **Live playground** | https://elevbit-ai.github.io/ops-crypt-ltc/playground.html |
 | **API catalog JSON** | https://elevbit-ai.github.io/ops-crypt-ltc/apis.json |
 | **GitHub (program)** | https://github.com/elevbit-ai/ops-crypt-ltc |
-| **API client source** | https://github.com/elevbit-ai/ops-crypt-ltc/blob/main/src/lib/ltc-api.js |
 
 > The website is **documentation only** — not the wallet program.  
 
