@@ -9,7 +9,8 @@
 > **Author:** Joaquim Pedro de Morais Filho  
 > **Web:** [USAcomment.com](https://usacomment.com) · **Email:** zicutake@mail.ru  
 
-🌐 **Project website (EN / PT):** see [`docs/site/`](docs/site/) · GitHub Pages after publish  
+🌐 **Project website (EN / PT):** [elevbit-ai.github.io/ops-crypt-ltc](https://elevbit-ai.github.io/ops-crypt-ltc/)  
+📦 **Repository:** [github.com/elevbit-ai/ops-crypt-ltc](https://github.com/elevbit-ai/ops-crypt-ltc)  
 
 ---
 
@@ -38,7 +39,7 @@
 ### Quick start
 
 ```bash
-git clone https://github.com/<USER>/ops-crypt-ltc.git
+git clone https://github.com/elevbit-ai/ops-crypt-ltc.git
 cd ops-crypt-ltc
 npm install
 npm run dev
@@ -101,9 +102,9 @@ ops-crypt-ltc/
 ├── src/                 # Wallet source (Vite)
 ├── app/                 # Production web build output
 ├── android/             # Capacitor Android project
-├── docs/site/           # Bilingual marketing site (GitHub Pages)
+├── docs/                # Bilingual website (GitHub Pages)
+├── documentation/       # APK / signing notes
 ├── website/             # Extra tutorial pages
-├── docs/SIGNING.md      # APK signing (local secrets only)
 └── package.json
 ```
 
